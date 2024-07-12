@@ -1,113 +1,168 @@
-import Image from "next/image";
+import { ItemExperience } from '@/components/home/ItemExperience';
+import { ListIconsContact } from '@/components/home/ListIconsContact';
+import { TechnologiesUsedList } from '@/components/home/TechnologiesUsedList';
+import { jobsExperience } from '@/constants/experience';
+import { projects } from '@/constants/projects';
+import Image from 'next/image';
+import { MdOutlineArrowOutward } from 'react-icons/md';
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+	return (
+		<div className='min-h-screen relative  bg-slate-900'>
+			<div className='container flex flex-col md:flex-row min-h-screen gap-5 py-12 md:px-12 lg:px-24 lg:py-0 '>
+				<header className='flex-1 flex md:sticky md:top-0 md:max-h-screen md:py-24 flex-col gap-10 justify-between'>
+					<div className='flex flex-col gap-3'>
+						<h1 className='text-4xl font-bold text-slate-200 tracking-tighter md:text-5xl'>
+							Roberto Andrade
+						</h1>
+						<h2 className='font-medium text-lg tracking-tight text-slate-200 sm:text-xl'>
+							Desarrollador Fullstack & móvil
+						</h2>
+						<p className='leading-normal text-slate-400 max-w-xs'>
+							Creo experiencias digitales perfectas en interfaces
+							atractivas y accesibles.
+						</p>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+						<nav className='hidden flex-col text-slate-200 mt-14 gap-4 md:flex'>
+							<a
+								href='#about'
+								className='text-slate-200 tracking-widest uppercase font-semibold text-xs flex items-center gap-3'
+							>
+								<span className='w-14 h-[2px] bg-slate-200' />
+								Sobre mí
+							</a>
+							<a
+								href='#experience'
+								className='text-slate-500 tracking-widest uppercase font-semibold text-xs flex items-center gap-3 group hover:text-slate-200'
+							>
+								<span className='w-8 h-[1px] bg-slate-500 group-hover:bg-slate-200 group-hover:w-14 group-hover:h-[2px] transition-all' />
+								Experiencia
+							</a>
+							<a
+								href='#projects'
+								className='text-slate-500 tracking-widest uppercase font-semibold text-xs flex items-center gap-3 group hover:text-slate-200'
+							>
+								<span className='w-8 h-[1px] bg-slate-500 group-hover:bg-slate-200 group-hover:w-14 group-hover:h-[2px] transition-all' />
+								Proyectos
+							</a>
+						</nav>
+					</div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+					<ListIconsContact />
+				</header>
+				<main className='flex-1 py-24'>
+					<section
+						className='flex flex-col gap-4  text-slate-400 text-md'
+						id='about'
+					>
+						<div className='sticky top-0 z-20 backdrop-blur py-5  bg-slate-900/70 mb-5 md:sr-only -mx-[32px]'>
+							<h2 className='container text-sm font-bold uppercase text-slate-200 tracking-widest md:sr-only'>
+								Sobre mí
+							</h2>
+						</div>
+						<p>
+							Soy un desarrollador web y móvil especializado en
+							Javascript y Typescript. Soy persistente y sobresalgo en
+							la resolución de problemas, lo que me permite mantenerme
+							concentrado incluso en situaciones desafiantes.
+						</p>
+						<p>
+							Mi principial objetivo en estos días es crear
+							aplicaciones completas en donde el usuario y el cliente
+							estén satisfechos.
+						</p>
+						<p>
+							Aprendo rápido y siempre busco mejorar mientras acepto
+							el trabajo en equipo para mejorar mis habilidades.
+							También doy clases y tutorías de programación y tengo un
+							canal de youtube con 5.500 suscriptores donde enseño a
+							crear proyectos web desde cero.
+						</p>
+						<p>
+							Cuando no estoy en la computadora, usualmente estoy en
+							el gimnasio entrenando o corriendo una maratón.
+						</p>
+					</section>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+					<section
+						id='experience'
+						className='my-24 '
+						aria-label='Experiencia Laboral'
+					>
+						<div className='sticky top-0 z-20 backdrop-blur py-5  bg-slate-900/70 mb-5 md:sr-only -mx-[32px]'>
+							<h2 className='container text-sm font-bold uppercase text-slate-200 tracking-widest md:sr-only'>
+								Experiencia
+							</h2>
+						</div>
+						{/* LISTA */}
+						<div className='relative'>
+							{/* Línea central */}
+							<div className='absolute lg:left-1/2 transform -translate-x-1/2 w-[1px] bg-slate-400 h-full'></div>
+							{/* ITEM  */}
+							{jobsExperience
+								.sort((a, b) => +b.startDate - +a.startDate)
+								.map(job => (
+									<ItemExperience key={job.id} {...job} />
+								))}
+						</div>
+					</section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+					<section
+						id='projects'
+						className='my-24'
+						aria-label='Proyectos'
+					>
+						<div className='sticky top-0 z-20 backdrop-blur py-5  bg-slate-900/70 mb-5 md:sr-only -mx-[32px]'>
+							<h2 className='container text-sm font-bold uppercase text-slate-200 tracking-widest md:sr-only'>
+								Proyectos
+							</h2>
+						</div>
+						<div className='flex flex-col gap-10'>
+							{projects.map(project => (
+								<div
+									className='flex gap-5 lg:p-5  rounded-md lg:hover:bg-teal-400/10  hover:shadow-sm transition-all flex-col lg:flex-row'
+									key={project.id}
+								>
+									<div className='w-[150px] h-[100px]'>
+										<Image
+											src={project.frontImage}
+											alt={project.name}
+											width={150}
+											height={150}
+											className='rounded-md object-cover h-full w-full'
+										/>
+									</div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+									<div className='flex flex-col gap-1 flex-1'>
+										<h3>
+											<a
+												href={project.link}
+												target='_blank'
+												rel='noreferrer noopener'
+												className='text-slate-200 font-semibold tracking-wide  leading-tight text-base flex items-center gap-1.5 group hover:text-teal-300 '
+											>
+												{project.name}
+												<MdOutlineArrowOutward
+													className='group-hover:text-teal-300 self-end'
+													size={16}
+												/>
+											</a>
+										</h3>
+										<p className='leading-normal text-sm text-slate-400 mb-1'>
+											{project.shortDescription}
+										</p>
+										{project.technologies.length > 0 && (
+											<TechnologiesUsedList
+												technologies={project.technologies}
+											/>
+										)}
+									</div>
+								</div>
+							))}
+						</div>
+					</section>
+				</main>
+			</div>
+		</div>
+	);
 }
