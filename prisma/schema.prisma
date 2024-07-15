@@ -13,22 +13,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
+enum ProjectStatus {
+  in_progress
+  completed
+  maintenance
+}
+
+model Project {
+  id               Int           @id @default(autoincrement())
+  name             String
+  shortDescription String
+  longDescription  String        @db.Text
+  type             String
+  category         String
+  frontImage       String
+  images           String[]      @default([])
+  link             String
+  githubRepo       String?
+  technologies     String[]
+  status           ProjectStatus
+  teamSize         Int           @default(1)
+  features         Json[]        @default([])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Project {
-  id          String  @id @default(uuid())
-  name        String
-  description String
-  image       String?
-  link        String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Job {
+  id String @id @default(uuid())
 }
