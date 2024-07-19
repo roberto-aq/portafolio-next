@@ -13,6 +13,8 @@ import { MultiSelect } from './MultiSelect';
 import { FeatureField } from './FeatureField';
 import { useNewProject } from '@/hooks';
 import { Loader } from '@/components/Loader';
+import { UploadButton } from '@/lib/uploadthing';
+import { technologiesList } from '@/constants/technologies';
 
 export const NewProjectForm = () => {
 	const form = useForm<z.infer<typeof projectFormSchema>>({
@@ -116,13 +118,7 @@ export const NewProjectForm = () => {
 							control={form.control}
 							setValue={form.setValue}
 							label='Tecnologías Utilizadas'
-							items={[
-								{ value: 'react', label: 'React' },
-								{ value: 'nextjs', label: 'Next.js' },
-								{ value: 'vue', label: 'Vue' },
-								{ value: 'angular', label: 'Angular' },
-								{ value: 'svelte', label: 'Svelte' },
-							]}
+							items={technologiesList}
 						/>
 					</div>
 

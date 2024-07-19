@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { ClerkProvider } from '@clerk/nextjs';
+
 import { Provider } from '@/components/providers/Provider';
 import { Toaster } from '@/components/ui/toaster';
-import { ClerkProvider } from '@clerk/nextjs';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,6 +27,7 @@ export default function RootLayout({
 				<body className={inter.className}>
 					<Provider>{children}</Provider>
 					<Toaster />
+					<SpeedInsights />
 				</body>
 			</html>
 		</ClerkProvider>

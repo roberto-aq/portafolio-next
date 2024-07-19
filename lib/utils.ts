@@ -27,7 +27,7 @@ export const projectFormSchema = z.object({
 		.string()
 		.min(2, 'La categoría debe tener al menos 2 caracteres'),
 	link: z.string().url('Debe ser una URL válida'),
-	githubRepo: z.string().url('Debe ser una URL válida').optional(),
+	githubRepo: z.string().url('Debe ser una URL válida'),
 	// TODO: ARREGLAR LAS IMAGENES
 	frontImage: z
 		.string()
@@ -70,3 +70,7 @@ export const projectFormSchema = z.object({
 		.record(z.string(), z.union([z.string(), z.number()]))
 		.optional(),
 });
+
+function sleep(ms: number) {
+	new Promise(resolve => setTimeout(resolve, ms));
+}

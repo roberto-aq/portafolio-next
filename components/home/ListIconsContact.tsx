@@ -26,7 +26,7 @@ const icons = [
 	},
 	{
 		component: FaLinkedin,
-		href: 'www.linkedin.com/in/roberto-andrade-quijije-2289561ba',
+		href: 'https://www.linkedin.com/in/roberto-andrade-quijije-2289561ba',
 		name: 'Linkedin',
 	},
 	{

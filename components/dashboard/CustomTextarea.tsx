@@ -36,6 +36,7 @@ export const CustomTextarea = ({
 								placeholder={placeholder}
 								className='resize-none text-slate-700'
 								{...field}
+								value={field.value as any}
 							/>
 						</FormControl>
 						<FormMessage className='text-red-500 mt-2' />

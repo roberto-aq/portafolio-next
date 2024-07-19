@@ -41,6 +41,7 @@ export const CustomInput = ({
 								placeholder={placeholder}
 								className='text-slate-700'
 								{...field}
+								value={field.value as any}
 								type={type}
 							/>
 						</FormControl>

@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/prisma';
 import { Project, ProjectStatus } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 
 export type CreateProjectInput = {
 	name: string;
@@ -38,6 +39,9 @@ export const createNewProject = async (
 				features: projectInput.features,
 			},
 		});
+
+		revalidatePath("/dashboard/projects")
+		revalidatePath("/")
 
 		return { ok: true, project };
 	} catch (error) {
