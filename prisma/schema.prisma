@@ -34,6 +34,7 @@ model Project {
   status           ProjectStatus
   teamSize         Int           @default(1)
   features         Json[]        @default([])
+  featured         Boolean       @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -41,4 +42,10 @@ model Project {
 
 model Job {
   id String @id @default(uuid())
+}
+
+model Technology {
+  id    Int     @id @default(autoincrement())
+  name  String
+  image String?
 }

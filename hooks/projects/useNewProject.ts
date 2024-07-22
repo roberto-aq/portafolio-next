@@ -1,7 +1,6 @@
 import { createNewProject } from '@/actions/projects/new-project';
 import { toast } from '@/components/ui/use-toast';
 import { useMutation } from '@tanstack/react-query';
-import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 
 export const useNewProject = () => {

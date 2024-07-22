@@ -4,12 +4,6 @@ import { MainContent } from '@/components/home/MainContent';
 import { NavbarHome } from '@/components/home/NavbarHome';
 
 export default async function Home() {
-	const { ok, projects } = await getProjects();
-
-	if (!ok || !projects) return;
-
-	console.log(projects);
-
 	return (
 		<div className='min-h-screen relative  bg-slate-900'>
 			<div className='container flex flex-col md:flex-row min-h-screen gap-5 py-12 md:px-12 lg:px-24 lg:py-0 '>
@@ -32,7 +26,7 @@ export default async function Home() {
 					<ListIconsContact />
 				</header>
 
-				<MainContent projects={projects} />
+				<MainContent />
 			</div>
 		</div>
 	);

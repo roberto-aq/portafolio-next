@@ -4,20 +4,23 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import { Events, scrollSpy } from 'react-scroll';
+import Marquee from '../magicui/marquee';
+
+import { Project } from '@prisma/client';
 
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import { TechnologiesUsedList } from './TechnologiesUsedList';
-import { projects } from '@/constants/projects';
 import { ItemExperience } from './ItemExperience';
 import { jobsExperience } from '@/constants/experience';
 import { useHomeStore } from '@/store/home.store';
-import { Project } from '@prisma/client';
+import { useProjects, useTechnologies } from '@/hooks';
+import { SkeletonTechnologies } from '../skeletons/SkeletonTechnologies';
+import { SkeletonProject } from '../skeletons/SkeletonProject';
 
-interface Props {
-	projects: Project[];
-}
+export const MainContent = () => {
+	const { technologies, isLoading } = useTechnologies();
+	const { projects, isLoadingProjects } = useProjects();
 
-export const MainContent = ({ projects }: Props) => {
 	const setActiveSection = useHomeStore(
 		state => state.setActiveSection
 	);
@@ -91,6 +94,40 @@ export const MainContent = ({ projects }: Props) => {
 					Cuando no estoy en la computadora, usualmente estoy en el
 					gimnasio entrenando o corriendo una maratón.
 				</p>
+
+				{technologies?.length === 0 ? (
+					<p className='text-slate-200 font-bold mt-4 text-lg'>
+						Sin tecnologías registradas
+					</p>
+				) : (
+					<div className='flex flex-col gap-3 w.full  md:w-[400px] mt-4'>
+						<h3 className='text-slate-200 text-xl'>Tecnologías</h3>
+
+						{isLoading || !technologies ? (
+							<SkeletonTechnologies />
+						) : (
+							<Marquee className='[--duration:20s]'>
+								{technologies.map(technology => (
+									<div
+										className='flex flex-col items-center justify-center gap-4 bg-slate-800  rounded-sm shadow-xl w-[100px] h-[100px]  relative group/card hover:bg-teal-400/20'
+										key={technology.id}
+									>
+										<Image
+											src={technology.image || ''}
+											width={50}
+											height={50}
+											alt={technology.name}
+											className='group-hover/card:-translate-y-3 group-hover/card:scale-105 transition-all duration-400 ease-in-out'
+										/>
+										<p className='text-slate-200 font-semibold text-xs absolute -bottom-10 transition-[bottom] duration-400 ease-in-out group-hover/card:bottom-3 '>
+											{technology.name}
+										</p>
+									</div>
+								))}
+							</Marquee>
+						)}
+					</div>
+				)}
 			</section>
 
 			<section
@@ -129,7 +166,13 @@ export const MainContent = ({ projects }: Props) => {
 					</h2>
 				</div>
 				<div className='flex flex-col gap-10'>
-					{projects ? (
+					{!projects || isLoadingProjects ? (
+						<SkeletonProject />
+					) : projects.length === 0 ? (
+						<p className='text-slate-200 font-bold text-lg'>
+							No hay proyectos
+						</p>
+					) : (
 						projects.map(project => (
 							<div
 								className='flex gap-5 lg:p-5  rounded-md lg:hover:bg-teal-400/10  hover:shadow-sm transition-all flex-col lg:flex-row'
@@ -171,8 +214,6 @@ export const MainContent = ({ projects }: Props) => {
 								</div>
 							</div>
 						))
-					) : (
-						<p className='text-slate-200 font-bold'>No hay proyectos</p>
 					)}
 				</div>
 			</section>

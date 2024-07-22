@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Descripción
 
-## Getting Started
+Portafolio web dinámico con dashboard administrativo
 
-First, run the development server:
+## Levantar el desarrollo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Clonar el repositorio
+2. Crear una copia del **.env.template** y renombrarlo a **.env** y cambiar variables de entorno.
+3. Instalar dependencias
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Levantar la base de datos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+docker compose up -d
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+5. Correr las migraciones de Prisma
 
-## Learn More
+```
+npx prisma migrate dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. LLenar el seed con los datos respectivos siguiendo el ejemplo
+7. Ejecutar el seed
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm run seed
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+8. Correr el proyecto
 
-## Deploy on Vercel
+```
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Servicios de terceros utilizadas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Autenticación: Clerk
+- Estilos: Shadcn
+- Animaciones: Framer Motion
+- Subida de archivos: Uploadthing

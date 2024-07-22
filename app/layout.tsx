@@ -12,7 +12,7 @@ import { Toaster } from '@/components/ui/toaster';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Portafolio Web',
+	title: 'Roberto Andrade',
 	description: 'Desarrollador Fullstack & Móvil ● Roberto Andrade',
 };
 
