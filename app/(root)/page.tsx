@@ -6,7 +6,7 @@ import { NavbarHome } from '@/components/home/NavbarHome';
 export default async function Home() {
 	return (
 		<div className='min-h-screen relative  bg-slate-900'>
-			<div className='container flex flex-col md:flex-row min-h-screen gap-5 py-12 md:px-12 lg:px-24 lg:py-0 '>
+			<div className='container flex flex-col md:flex-row min-h-screen gap-5 py-12 md:px-12 lg:px-18 lg:py-0 '>
 				<header className='flex-1 flex md:sticky md:top-0 md:max-h-screen md:py-24 flex-col gap-10 justify-between'>
 					<div className='flex flex-col gap-3'>
 						<h1 className='text-4xl font-bold text-slate-200 tracking-tighter md:text-5xl'>

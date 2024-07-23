@@ -1,15 +1,13 @@
-import { createNewProject } from '@/actions/projects/new-project';
+import { createTechnology } from '@/actions/technologies/new-technology';
 import { toast } from '@/components/ui/use-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
-export const useNewProject = () => {
-	const router = useRouter();
+export const useNewTechnology = () => {
 	const queryClient = useQueryClient();
 
 	const { mutate, isPending } = useMutation({
-		mutationKey: ['new-project'],
-		mutationFn: createNewProject,
+		mutationKey: ['new-technology'],
+		mutationFn: createTechnology,
 		onError: error => {
 			toast({
 				title: 'Algo salió mal',
@@ -18,13 +16,11 @@ export const useNewProject = () => {
 			});
 		},
 		onSuccess: () => {
-			router.push('/dashboard/projects');
-
-			queryClient.invalidateQueries({ queryKey: ['projects'] });
+			queryClient.invalidateQueries({ queryKey: ['technologies'] });
 
 			toast({
 				title: 'Éxito',
-				description: 'El proyecto se ha creado correctamente',
+				description: 'La tecnología se ha creado correctamente',
 			});
 		},
 	});

@@ -6,9 +6,9 @@ import { notFound } from 'next/navigation';
 import { TableProjects } from '@/components/dashboard/projects/TableProjects';
 
 export default async function ProjectsPage() {
-	const { ok, projects } = await getProjects();
+	const projects = await getProjects();
 
-	if (!ok || !projects) return notFound();
+	if (!projects) return notFound();
 
 	return (
 		<div className='flex flex-col gap-7 '>

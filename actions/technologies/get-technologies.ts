@@ -1,7 +1,6 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import { sleep } from '@/lib/utils';
 
 export const getTechnologies = async () => {
 	try {

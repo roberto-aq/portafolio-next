@@ -8,9 +8,10 @@ async function main() {
 	await prisma.job.deleteMany();
 	await prisma.technology.deleteMany();
 
-	const { technologies } = initialData;
+	const { technologies, projects } = initialData;
 
 	await prisma.technology.createMany({ data: technologies });
+	await prisma.project.createMany({ data: projects });
 }
 
 (() => {

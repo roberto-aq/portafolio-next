@@ -12,10 +12,14 @@ import {
 import { Input } from '../ui/input';
 
 import { projectFormSchema } from '@/lib/utils';
+import { technologyFormSchema } from '@/lib/validations';
+
+type schema = z.infer<typeof projectFormSchema> &
+	z.infer<typeof technologyFormSchema>;
 
 interface Props {
-	control: Control<z.infer<typeof projectFormSchema>>;
-	name: FieldPath<z.infer<typeof projectFormSchema>>;
+	control: Control<any>;
+	name: FieldPath<schema>;
 	label: string;
 	placeholder: string;
 	type?: HTMLInputTypeAttribute;

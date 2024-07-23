@@ -4,3 +4,4 @@ export * from './projects/useProjects';
 
 // Technologies
 export * from './technologies/useTechnologies';
+export * from './technologies/useNewTechnology';

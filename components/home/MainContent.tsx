@@ -106,7 +106,7 @@ export const MainContent = () => {
 						{isLoading || !technologies ? (
 							<SkeletonTechnologies />
 						) : (
-							<Marquee className='[--duration:20s]'>
+							<Marquee className='[--duration:30s]'>
 								{technologies.map(technology => (
 									<div
 										className='flex flex-col items-center justify-center gap-4 bg-slate-800  rounded-sm shadow-xl w-[100px] h-[100px]  relative group/card hover:bg-teal-400/20'
@@ -178,30 +178,19 @@ export const MainContent = () => {
 								className='flex gap-5 lg:p-5  rounded-md lg:hover:bg-teal-400/10  hover:shadow-sm transition-all flex-col lg:flex-row'
 								key={project.id}
 							>
-								<div className='w-[150px] h-[100px]'>
+								<div className='w-full md:w-[200px] lg:w-[150px] h-full md:h-[120px]'>
 									<Image
 										src={project.frontImage}
 										alt={project.name}
 										width={150}
 										height={150}
-										className='rounded-md object-cover h-full w-full'
+										className='rounded-md object-cover  h-full w-full'
 									/>
 								</div>
 
 								<div className='flex flex-col gap-1 flex-1'>
-									<h3>
-										<a
-											href={project.link}
-											target='_blank'
-											rel='noreferrer noopener'
-											className='text-slate-200 font-semibold tracking-wide  leading-tight text-base flex items-center gap-1.5 group hover:text-teal-300 '
-										>
-											{project.name}
-											<MdOutlineArrowOutward
-												className='group-hover:text-teal-300 self-end'
-												size={16}
-											/>
-										</a>
+									<h3 className='text-slate-200 font-semibold tracking-wide  leading-tight text-lg mb-2'>
+										{project.name}
 									</h3>
 									<p className='leading-normal text-sm text-slate-400 mb-1'>
 										{project.shortDescription}
@@ -211,6 +200,18 @@ export const MainContent = () => {
 											technologies={project.technologies}
 										/>
 									)}
+									<a
+										href={project.link}
+										target='_blank'
+										rel='noreferrer noopener'
+										className='self-start text-slate-200 font-semibold tracking-wide  leading-tight text-md  flex items-center gap-1 group hover:text-teal-300 mt-4 md:self-end md:mt-2 md:text-sm'
+									>
+										Ir al Demo
+										<MdOutlineArrowOutward
+											className='group-hover:text-teal-300 group-hover:-translate-y-1 transition-transform duration-300 self-end'
+											size={16}
+										/>
+									</a>
 								</div>
 							</div>
 						))

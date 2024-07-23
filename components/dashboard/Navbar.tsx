@@ -9,13 +9,14 @@ const links = [
 	{ label: 'Resumen', href: '/dashboard/summary' },
 	{ label: 'Proyectos', href: '/dashboard/projects' },
 	{ label: 'Experiencia Laboral', href: '/dashboard/experience' },
+	{ label: 'Tecnologías', href: '/dashboard/technologies' },
 ];
 
 export const Navbar = () => {
 	const pathname = usePathname();
 
 	return (
-		<div className='px-5 py-3 flex justify-between items-center bg-slate-900/75 sticky top-0'>
+		<div className='px-5 py-3 flex justify-between items-center bg-slate-900/75 sticky top-0 z-50'>
 			<Link href='/'>
 				<span className='text-slate-200 text-xl font-bold'>Logo</span>
 			</Link>
@@ -27,7 +28,8 @@ export const Navbar = () => {
 						key={link.label}
 						className={cn(
 							'text-sm text-slate-400 hover:text-slate-200 hover:underline transition-all',
-							pathname.includes(link.href) && 'text-slate-200 underline'
+							pathname.includes(link.href) &&
+								'text-slate-200 underline'
 						)}
 					>
 						{link.label}
