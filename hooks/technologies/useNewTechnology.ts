@@ -21,6 +21,7 @@ export const useNewTechnology = () => {
 			toast({
 				title: 'Éxito',
 				description: 'La tecnología se ha creado correctamente',
+				duration: 1500,
 			});
 		},
 	});

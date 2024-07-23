@@ -100,7 +100,7 @@ export const MainContent = () => {
 						Sin tecnologías registradas
 					</p>
 				) : (
-					<div className='flex flex-col gap-3 w.full  md:w-[400px] mt-4'>
+					<div className='flex flex-col gap-3 w.full  md:w-[400px] lg:w-[520px] mt-4'>
 						<h3 className='text-slate-200 text-xl'>Tecnologías</h3>
 
 						{isLoading || !technologies ? (

@@ -27,6 +27,10 @@ export const NewFormTechnology = () => {
 		console.log(data);
 
 		mutate({ name: data.name, image: data.image });
+		form.reset({
+			name: '',
+			image: '',
+		});
 	};
 
 	if (isPending)
