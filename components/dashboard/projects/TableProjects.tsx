@@ -11,11 +11,15 @@ import {
 	TableRow,
 } from '@/components/ui/table';
 
-import { Project } from '@prisma/client';
+import { Project, Technology } from '@prisma/client';
 import Link from 'next/link';
 
+type ProjectComplete = Project & {
+	technologies: Technology[];
+};
+
 interface Props {
-	projects: Project[];
+	projects: ProjectComplete[];
 }
 
 const statusName = {
@@ -26,15 +30,15 @@ const statusName = {
 
 export const TableProjects = ({ projects }: Props) => {
 	return (
-		<Table className='text-slate-200'>
+		<Table className='text-slate-200 border border-slate-700 rounded-lg overflow-hidden'>
 			<TableHeader>
 				<TableRow>
-					<TableHead className='w-[100px]'>Nombre</TableHead>
-					<TableHead>Descripción corta</TableHead>
-					<TableHead>Tipo</TableHead>
-					<TableHead>Categoría</TableHead>
-					<TableHead>Tecnologías</TableHead>
-					<TableHead className='text-right'>Estado</TableHead>
+					<TableHead className='w-1/6'>Nombre</TableHead>
+					<TableHead className='w-1/3'>Descripción corta</TableHead>
+					<TableHead className='w-1/12'>Tipo</TableHead>
+					<TableHead className='w-1/12'>Categoría</TableHead>
+					<TableHead className='w-1/4'>Tecnologías</TableHead>
+					<TableHead className='w-1/12 text-right'>Estado</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>
@@ -43,22 +47,24 @@ export const TableProjects = ({ projects }: Props) => {
 						<TableCell className='font-bold capitalize'>
 							<Link
 								href={`/dashboard/projects/${project.id}`}
-								className='hover:underline'
+								className='text-blue-400 hover:text-blue-300 transition-colors duration-200'
 							>
 								{project.name}
 							</Link>
 						</TableCell>
-						<TableCell>{project.shortDescription}</TableCell>
+						<TableCell className='max-w-xs truncate'>
+							{project.shortDescription}
+						</TableCell>
 						<TableCell>{project.type}</TableCell>
 						<TableCell>{project.category}</TableCell>
-						<TableCell className='flex gap-2'>
+						<TableCell className='flex flex-wrap gap-2 max-w[300px]'>
 							{project.technologies.map((t, index) => (
 								<Badge
 									key={index}
 									variant='secondary'
-									className='capitalize'
+									className='capitalize whitespace-nowrap'
 								>
-									{t}
+									{t.name}
 								</Badge>
 							))}
 						</TableCell>

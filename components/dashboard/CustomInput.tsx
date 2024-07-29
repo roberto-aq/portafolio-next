@@ -11,7 +11,7 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 
-import { projectFormSchema } from '@/lib/utils';
+import { cn, projectFormSchema } from '@/lib/utils';
 import { technologyFormSchema } from '@/lib/validations';
 
 type schema = z.infer<typeof projectFormSchema> &
@@ -23,6 +23,7 @@ interface Props {
 	label: string;
 	placeholder: string;
 	type?: HTMLInputTypeAttribute;
+	className?: string;
 }
 
 export const CustomInput = ({
@@ -31,6 +32,7 @@ export const CustomInput = ({
 	label,
 	placeholder,
 	type = 'text',
+	className,
 }: Props) => {
 	return (
 		<FormField
@@ -43,7 +45,10 @@ export const CustomInput = ({
 						<FormControl>
 							<Input
 								placeholder={placeholder}
-								className='text-slate-700'
+								className={cn(
+									'text-slate-800 font-bold placeholder:font-normal placeholder:text-slate-600',
+									className
+								)}
 								{...field}
 								value={field.value as any}
 								type={type}

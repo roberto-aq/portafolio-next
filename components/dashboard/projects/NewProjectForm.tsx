@@ -11,10 +11,9 @@ import { CustomTextarea } from '../CustomTextarea';
 import { Combobox } from './Combobox';
 import { MultiSelect } from './MultiSelect';
 import { FeatureField } from './FeatureField';
-import { useNewProject } from '@/hooks';
+import { useNewProject, useTechnologies } from '@/hooks';
 import { Loader } from '@/components/Loader';
 import { UploadButton } from '@/lib/uploadthing';
-import { technologiesList } from '@/constants/technologies';
 
 export const NewProjectForm = () => {
 	const form = useForm<z.infer<typeof projectFormSchema>>({
@@ -31,6 +30,13 @@ export const NewProjectForm = () => {
 	});
 
 	const { mutate, isPending } = useNewProject();
+	const { technologies } = useTechnologies();
+
+	const technologiesList =
+		technologies?.map(technology => ({
+			label: technology.name,
+			value: technology.id.toString(),
+		})) || [];
 
 	const onSubmit = async (
 		data: z.infer<typeof projectFormSchema>
@@ -59,7 +65,7 @@ export const NewProjectForm = () => {
 					className='grid grid-cols-1 md:grid-cols-2 gap-5 lg:grid-cols-3'
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
-					<div className='bg-stone-950 p-8 rounded-lg shadow-lg flex flex-col gap-6 lg:col-span-2'>
+					<div className='bg-card p-8 rounded-lg shadow-lg flex flex-col gap-6 lg:col-span-2'>
 						<CustomInput
 							control={form.control}
 							name='name'
@@ -75,7 +81,7 @@ export const NewProjectForm = () => {
 						/>
 					</div>
 
-					<div className='bg-stone-950 p-8 rounded-lg shadow-lg flex flex-col gap-6 '>
+					<div className='bg-card p-8 rounded-lg shadow-lg flex flex-col gap-6 '>
 						<Combobox
 							items={[
 								{ value: 'full-stack', label: 'Full Stack' },
@@ -95,7 +101,7 @@ export const NewProjectForm = () => {
 						/>
 					</div>
 
-					<div className='bg-stone-950 p-8 rounded-lg shadow-lg flex flex-col gap-6 col-start-1 lg:col-span-2'>
+					<div className='bg-card p-8 rounded-lg shadow-lg flex flex-col gap-6 col-start-1 lg:col-span-2'>
 						<CustomInput
 							control={form.control}
 							name='link'
@@ -112,7 +118,7 @@ export const NewProjectForm = () => {
 						/>
 					</div>
 
-					<div className='bg-stone-950 p-8 rounded-lg shadow-lg flex flex-col gap-6 row-start-3 md:row-start-2 md:col-start-2 lg:col-start-3'>
+					<div className='bg-card p-8 rounded-lg shadow-lg flex flex-col gap-6 row-start-3 md:row-start-2 md:col-start-2 lg:col-start-3'>
 						<MultiSelect
 							name='technologies'
 							control={form.control}
@@ -122,7 +128,7 @@ export const NewProjectForm = () => {
 						/>
 					</div>
 
-					<div className=' bg-stone-950 p-8 rounded-lg shadow-lg flex flex-col gap-6 col-span-2'>
+					<div className=' bg-card p-8 rounded-lg shadow-lg flex flex-col gap-6 col-span-2'>
 						<CustomTextarea
 							control={form.control}
 							name='longDescription'
@@ -136,7 +142,7 @@ export const NewProjectForm = () => {
 						/>
 					</div>
 
-					<div className='bg-stone-950 p-8 rounded-lg shadow-lg flex flex-col gap-6 lg:col-start-3'>
+					<div className='bg-card p-8 rounded-lg shadow-lg flex flex-col gap-6 lg:col-start-3'>
 						<Combobox
 							items={[
 								{ value: 'completed', label: 'Completado' },
@@ -149,7 +155,7 @@ export const NewProjectForm = () => {
 							label='Estado del proyecto'
 						/>
 					</div>
-					<div className='bg-stone-950 p-8 rounded-lg shadow-lg flex flex-col gap-6 col-span-full'>
+					<div className='bg-card p-8 rounded-lg shadow-lg flex flex-col gap-6 col-span-full'>
 						<CustomInput
 							name='frontImage'
 							control={form.control}

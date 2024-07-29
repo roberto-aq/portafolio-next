@@ -4,7 +4,9 @@ import prisma from '@/lib/prisma';
 
 export const getProjects = async () => {
 	try {
-		const projects = await prisma.project.findMany();
+		const projects = await prisma.project.findMany({
+			include: { technologies: true },
+		});
 
 		return projects;
 	} catch (error) {

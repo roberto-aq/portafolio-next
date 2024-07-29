@@ -8,7 +8,6 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { Provider } from '@/components/providers/Provider';
 import { Toaster } from '@/components/ui/toaster';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

@@ -1,5 +1,5 @@
+import { FormTechnology } from '@/components/dashboard/technologies/FormTechnology';
 import { ListTechnologies } from '@/components/dashboard/technologies/ListTechnologies';
-import { NewFormTechnology } from '@/components/dashboard/technologies/NewFormTechnology';
 
 export default function DashboardTechnologiesPage() {
 	return (
@@ -11,7 +11,7 @@ export default function DashboardTechnologiesPage() {
 			</div>
 
 			<div className='flex-1 relative'>
-				<NewFormTechnology />
+				<FormTechnology />
 			</div>
 		</div>
 	);

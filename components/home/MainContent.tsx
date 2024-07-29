@@ -107,23 +107,25 @@ export const MainContent = () => {
 							<SkeletonTechnologies />
 						) : (
 							<Marquee className='[--duration:30s]'>
-								{technologies.map(technology => (
-									<div
-										className='flex flex-col items-center justify-center gap-4 bg-slate-800  rounded-sm shadow-xl w-[100px] h-[100px]  relative group/card hover:bg-teal-400/20'
-										key={technology.id}
-									>
-										<Image
-											src={technology.image || ''}
-											width={50}
-											height={50}
-											alt={technology.name}
-											className='group-hover/card:-translate-y-3 group-hover/card:scale-105 transition-all duration-400 ease-in-out'
-										/>
-										<p className='text-slate-200 font-semibold text-xs absolute -bottom-10 transition-[bottom] duration-400 ease-in-out group-hover/card:bottom-3 '>
-											{technology.name}
-										</p>
-									</div>
-								))}
+								{technologies
+									.filter(t => t.image)
+									.map(technology => (
+										<div
+											className='flex flex-col items-center justify-center gap-4 bg-slate-800  rounded-sm shadow-xl w-[100px] h-[100px]  relative group/card hover:bg-teal-400/20'
+											key={technology.id}
+										>
+											<Image
+												src={technology.image || ''}
+												width={50}
+												height={50}
+												alt={technology.name}
+												className='group-hover/card:-translate-y-3 group-hover/card:scale-105 transition-all duration-400 ease-in-out'
+											/>
+											<p className='text-slate-200 font-semibold text-xs absolute -bottom-10 transition-[bottom] duration-400 ease-in-out group-hover/card:bottom-3 '>
+												{technology.name}
+											</p>
+										</div>
+									))}
 							</Marquee>
 						)}
 					</div>

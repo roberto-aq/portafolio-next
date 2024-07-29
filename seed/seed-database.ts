@@ -10,8 +10,22 @@ async function main() {
 
 	const { technologies, projects } = initialData;
 
+	// Crear las tecnologías y obtenerlas
 	await prisma.technology.createMany({ data: technologies });
-	await prisma.project.createMany({ data: projects });
+
+	// Crear proyectos
+	for (const project of projects) {
+		await prisma.project.create({
+			data: {
+				...project,
+				technologies: {
+					connect: project.technologies.map(id => ({ id })),
+				},
+			},
+		});
+	}
+
+	console.log('Seed completado exitosamente');
 }
 
 (() => {

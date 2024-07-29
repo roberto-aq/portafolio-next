@@ -1,4 +1,16 @@
-export const jobsExperience = [
+import { Technology } from '@prisma/client';
+
+interface Job {
+	id: number;
+	period: string;
+	startDate: Date;
+	title: string;
+	company: string;
+	description: string;
+	technologies: Technology[];
+}
+
+export const jobsExperience: Job[] = [
 	{
 		id: 1,
 		period: 'AGO 2022 - OCT 2022',
@@ -7,7 +19,23 @@ export const jobsExperience = [
 		company: 'Altura S.A',
 		description:
 			'Duplicar y probar la base de datos, asegurando la integridad y consistencia de los datos',
-		technologies: ['MySQL', 'Java', 'Javascript'],
+		technologies: [
+			{
+				id: 1,
+				name: 'MySQL',
+				image: null,
+			},
+			{
+				id: 2,
+				name: 'Java',
+				image: null,
+			},
+			{
+				id: 3,
+				name: 'Javascript',
+				image: null,
+			},
+		],
 	},
 	{
 		id: 2,
@@ -17,7 +45,28 @@ export const jobsExperience = [
 		company: 'Universidad Técnica de Manabí',
 		description:
 			'Desarrollé un dashboard para el sistema de becas de la universidad utilizando Angular, integrando una API existente para la visualización de datos.',
-		technologies: ['Angular', 'CSS', 'Typescript', 'Material UI'],
+		technologies: [
+			{
+				id: 4,
+				name: 'Angular',
+				image: null,
+			},
+			{
+				id: 5,
+				name: 'CSS',
+				image: null,
+			},
+			{
+				id: 6,
+				name: 'Typescript',
+				image: null,
+			},
+			{
+				id: 7,
+				name: 'Material UI',
+				image: null,
+			},
+		],
 	},
 	{
 		id: 3,
@@ -28,13 +77,41 @@ export const jobsExperience = [
 		description:
 			'Dirigí el desarrollo de una aplicación móvil de salud mental para un concurso internacional, usando React Native, NestJS, PostgreSQL y Docker. Implementé un chatbot con inteligencia artificial mediante la API de OpenAI, alcanzando la final del concurso.',
 		technologies: [
-			'React Native',
-			'Nestjs',
-			'Typescript',
-			'OpenAI',
-			'Tailwind',
-			'PostgreSQL',
-			'Docker',
+			{
+				id: 8,
+				name: 'React Native',
+				image: null,
+			},
+			{
+				id: 9,
+				name: 'Nestjs',
+				image: null,
+			},
+			{
+				id: 6,
+				name: 'Typescript',
+				image: null,
+			},
+			{
+				id: 10,
+				name: 'Open AI',
+				image: null,
+			},
+			{
+				id: 11,
+				name: 'TailwindCSS',
+				image: null,
+			},
+			{
+				id: 12,
+				name: 'PostgreSQL',
+				image: null,
+			},
+			{
+				id: 13,
+				name: 'Docker',
+				image: null,
+			},
 		],
 	},
 	{
@@ -46,13 +123,41 @@ export const jobsExperience = [
 		description:
 			'Como desarrollador freelance, he colaborado con startups y empresas emergentes, creando soluciones web personalizadas. Me he enfocado en mejorar la experiencia del usuario, optimizar el rendimiento y gestionar proyectos desde su concepción hasta su implementación.',
 		technologies: [
-			'Nextjs',
-			'React',
-			'Nestjs',
-			'React Native',
-			'Typescript',
-			'Postgres',
-			'Docker',
+			{
+				id: 14,
+				name: 'Nextjs',
+				image: null,
+			},
+			{
+				id: 15,
+				name: 'Reactjs',
+				image: null,
+			},
+			{
+				id: 8,
+				name: 'React Native',
+				image: null,
+			},
+			{
+				id: 9,
+				name: 'Nestjs',
+				image: null,
+			},
+			{
+				id: 12,
+				name: 'PostgreSQL',
+				image: null,
+			},
+			{
+				id: 13,
+				name: 'Docker',
+				image: null,
+			},
+			{
+				id: 6,
+				name: 'Typescript',
+				image: null,
+			},
 		],
 	},
 ];

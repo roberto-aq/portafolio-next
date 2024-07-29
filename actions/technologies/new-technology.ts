@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma';
 
 export const createTechnology = async (technologyInput: {
 	name: string;
-	image: string;
+	image?: string;
 }) => {
 	try {
 		const technology = await prisma.technology.create({

@@ -1,7 +1,8 @@
+import { Technology } from '@prisma/client';
 import { TechnologiesUsedList } from './TechnologiesUsedList';
 
 interface Props {
-	technologies: string[];
+	technologies: Technology[];
 	description: string;
 	period: string;
 	company: string;

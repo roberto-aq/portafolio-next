@@ -34,14 +34,16 @@ export const createNewProject = async (
 				frontImage: projectInput.frontImage,
 				link: projectInput.link,
 				githubRepo: projectInput.githubRepo,
-				technologies: projectInput.technologies,
+				technologies: {
+					connect: projectInput.technologies.map(id => ({ id: +id })),
+				},
 				status: projectInput.status,
 				features: projectInput.features,
 			},
 		});
 
-		revalidatePath("/dashboard/projects")
-		revalidatePath("/")
+		revalidatePath('/dashboard/projects');
+		revalidatePath('/');
 
 		return { ok: true, project };
 	} catch (error) {

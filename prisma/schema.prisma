@@ -30,11 +30,11 @@ model Project {
   images           String[]      @default([])
   link             String
   githubRepo       String?
-  technologies     String[]
   status           ProjectStatus
   teamSize         Int           @default(1)
   features         Json[]        @default([])
   featured         Boolean       @default(false)
+  technologies     Technology[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -45,7 +45,8 @@ model Job {
 }
 
 model Technology {
-  id    Int     @id @default(autoincrement())
-  name  String
-  image String?
+  id       Int       @id @default(autoincrement())
+  name     String
+  image    String?
+  projects Project[]
 }

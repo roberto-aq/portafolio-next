@@ -1,7 +1,8 @@
+import { Technology } from '@prisma/client';
 import { ItemTechnologyUsed } from './ItemTechnologyUsed';
 
 interface Props {
-	technologies: string[];
+	technologies: Technology[];
 }
 
 export const TechnologiesUsedList = ({ technologies }: Props) => {
@@ -11,7 +12,10 @@ export const TechnologiesUsedList = ({ technologies }: Props) => {
 			aria-label='Tecnologías utilizadas'
 		>
 			{technologies.map((technology, index) => (
-				<ItemTechnologyUsed key={index} technology={technology} />
+				<ItemTechnologyUsed
+					key={index}
+					technologyName={technology.name}
+				/>
 			))}
 		</ul>
 	);

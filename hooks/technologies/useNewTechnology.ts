@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 export const useNewTechnology = () => {
 	const queryClient = useQueryClient();
 
-	const { mutate, isPending } = useMutation({
+	const { mutate, isPending, data } = useMutation({
 		mutationKey: ['new-technology'],
 		mutationFn: createTechnology,
 		onError: error => {
@@ -15,7 +15,7 @@ export const useNewTechnology = () => {
 				variant: 'destructive',
 			});
 		},
-		onSuccess: () => {
+		onSuccess: data => {
 			queryClient.invalidateQueries({ queryKey: ['technologies'] });
 
 			toast({
@@ -23,11 +23,14 @@ export const useNewTechnology = () => {
 				description: 'La tecnología se ha creado correctamente',
 				duration: 1500,
 			});
+
+			return data;
 		},
 	});
 
 	return {
 		mutate,
 		isPending,
+		data,
 	};
 };

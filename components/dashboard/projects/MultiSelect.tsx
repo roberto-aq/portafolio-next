@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { cn, projectFormSchema } from '@/lib/utils'; 
-import { Check, ChevronsUpDown, X } from 'lucide-react';
+import { cn, projectFormSchema } from '@/lib/utils';
+import { Check, ChevronsUpDown, Plus, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -27,6 +27,7 @@ import {
 	useWatch,
 } from 'react-hook-form';
 import { z } from 'zod';
+import { useNewTechnology } from '@/hooks';
 
 interface Props {
 	control: Control<z.infer<typeof projectFormSchema>>;
@@ -47,6 +48,9 @@ export const MultiSelect = ({
 	label,
 }: Props) => {
 	const [open, setOpen] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
+
+	const { mutate, data } = useNewTechnology();
 
 	const fieldValue = useWatch({
 		control,
@@ -54,12 +58,44 @@ export const MultiSelect = ({
 		defaultValue: [],
 	}) as string[];
 
+	const filteredItems = items.filter(item =>
+		item.label.toLowerCase().includes(searchValue.toLowerCase())
+	);
+
 	const handleSelect = (currentValue: string) => {
+		console.log('Seleccionando:', currentValue);
 		const updatedValues = fieldValue.includes(currentValue)
 			? fieldValue.filter(value => value !== currentValue)
 			: [...fieldValue, currentValue];
 
+		console.log('Valores actualizados:', updatedValues);
 		setValue(name, updatedValues, { shouldValidate: true });
+	};
+
+	const handleAddNewTechnology = async () => {
+		if (searchValue.trim()) {
+			mutate(
+				{ name: searchValue.trim() },
+				{
+					onSuccess: (data: any) => {
+						handleSelect(data?.id.toString());
+						console.log(data);
+					},
+				}
+			);
+			setSearchValue('');
+			setOpen(false);
+		}
+	};
+
+	const handleKeyDown = (
+		e: React.KeyboardEvent<HTMLInputElement>
+	) => {
+		if (e.key === 'Enter' && filteredItems.length === 0) {
+			e.preventDefault();
+			handleAddNewTechnology();
+			setOpen(false);
+		}
 	};
 
 	return (
@@ -84,9 +120,25 @@ export const MultiSelect = ({
 							</PopoverTrigger>
 							<PopoverContent className='w-full  p-0'>
 								<Command className=''>
-									<CommandInput placeholder='Search technology...' />
+									<CommandInput
+										placeholder='Search technology...'
+										value={searchValue}
+										onValueChange={setSearchValue}
+										onKeyDown={handleKeyDown}
+									/>
 									<CommandList>
-										<CommandEmpty>Sin resultados.</CommandEmpty>
+										<CommandEmpty className='grid place-items-center p-3'>
+											<Button
+												className='w-full flex items-center justify-start font-semibold capitalize'
+												onClick={handleAddNewTechnology}
+												variant='ghost'
+											>
+												<Plus
+													className={cn('mr-2 h-4 w-4 text-primary')}
+												/>
+												{searchValue}
+											</Button>
+										</CommandEmpty>
 										<CommandGroup>
 											{items.map(item => (
 												<CommandItem
