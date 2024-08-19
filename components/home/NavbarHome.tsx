@@ -16,6 +16,7 @@ const NavItem = ({ to, active, children }: NavItemProps) => {
 	return (
 		<Link
 			to={to}
+			href={`#${to}`}
 			smooth={true}
 			duration={500}
 			spy={true}
@@ -40,7 +41,10 @@ export const NavbarHome = () => {
 	const activeSection = useHomeStore(state => state.activeSection);
 
 	return (
-		<nav className='hidden flex-col text-slate-200 mt-14 gap-4 md:flex'>
+		<nav
+			className='hidden flex-col text-slate-200 mt-14 gap-4 md:flex'
+			aria-label='Navegación principal'
+		>
 			<NavItem to='about' active={activeSection === 'about'}>
 				Sobre mí
 			</NavItem>

@@ -46,23 +46,27 @@ export const ListIconsContact = () => {
 		<ul className='flex gap-5'>
 			{icons.map((icon, index) => (
 				<li key={index} className=''>
-					<TooltipProvider>
+					<TooltipProvider delayDuration={200}>
 						<Tooltip>
-							<TooltipTrigger>
+							<TooltipTrigger asChild>
 								<a
 									href={icon.href}
 									target='_blank'
 									rel='noreferrer noopener'
+									aria-label={`Ir a ${icon.name}`}
+									className='inline-block'
 								>
 									<Icon
 										icon={icon.component}
 										size={25}
 										className='text-slate-400 hover:text-slate-200 transition-all'
+										aria-hidden='true'
 									/>
+									<span className='sr-only'>{icon.name}</span>
 								</a>
 							</TooltipTrigger>
 							<TooltipContent>
-								<p className='text-slate-900'>{icon.name}</p>
+								<p className='text-slate-400'>{icon.name}</p>
 							</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>

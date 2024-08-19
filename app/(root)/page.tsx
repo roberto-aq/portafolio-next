@@ -1,9 +1,19 @@
 import { getProjects } from '@/actions/projects/get-projects';
+import { getTechnologies } from '@/actions/technologies/get-technologies';
 import { ListIconsContact } from '@/components/home/ListIconsContact';
 import { MainContent } from '@/components/home/MainContent';
 import { NavbarHome } from '@/components/home/NavbarHome';
 
+export const revalidate = 3600;
+
 export default async function Home() {
+	const projects = await getProjects();
+	const technologies = await getTechnologies();
+
+	if (!projects || !technologies) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<div className='min-h-screen relative  bg-slate-900'>
 			<div className='container flex flex-col md:flex-row min-h-screen gap-5 py-12 md:px-12 lg:px-18 lg:py-0 '>
@@ -26,7 +36,10 @@ export default async function Home() {
 					<ListIconsContact />
 				</header>
 
-				<MainContent />
+				<MainContent
+					projects={projects}
+					technologies={technologies}
+				/>
 			</div>
 		</div>
 	);

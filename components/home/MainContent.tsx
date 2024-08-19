@@ -4,22 +4,34 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import { Events, scrollSpy } from 'react-scroll';
-import Marquee from '../magicui/marquee';
-
-import { Project } from '@prisma/client';
 
 import { MdOutlineArrowOutward } from 'react-icons/md';
-import { TechnologiesUsedList } from './TechnologiesUsedList';
-import { ItemExperience } from './ItemExperience';
 import { jobsExperience } from '@/constants/experience';
 import { useHomeStore } from '@/store/home.store';
 import { useProjects, useTechnologies } from '@/hooks';
 import { SkeletonTechnologies } from '../skeletons/SkeletonTechnologies';
 import { SkeletonProject } from '../skeletons/SkeletonProject';
 
-export const MainContent = () => {
-	const { technologies, isLoading } = useTechnologies();
-	const { projects, isLoadingProjects } = useProjects();
+// Lazy Loaded Components
+import { TechnologiesUsedList } from './TechnologiesUsedList';
+import { ItemExperience } from './ItemExperience';
+import Marquee from '../magicui/marquee';
+import { Project, Technology } from '@prisma/client';
+
+interface ProjectWithTechnologies extends Project {
+	technologies: Technology[];
+}
+
+interface Props {
+	technologies: Technology[];
+	projects: ProjectWithTechnologies[];
+}
+
+export const MainContent = ({ technologies, projects }: Props) => {
+	// const { technologies, isLoading } = useTechnologies();
+	// const { projects, isLoadingProjects } = useProjects();
+	let isLoading = false;
+	let isLoadingProjects = false;
 
 	const setActiveSection = useHomeStore(
 		state => state.setActiveSection
@@ -43,13 +55,8 @@ export const MainContent = () => {
 	]);
 
 	useEffect(() => {
-		Events.scrollEvent.register('begin', function () {
-			// console.log('begin', arguments);
-		});
-
-		Events.scrollEvent.register('end', function () {
-			// console.log('end', arguments);
-		});
+		Events.scrollEvent.register('begin', function () {});
+		Events.scrollEvent.register('end', function () {});
 
 		scrollSpy.update();
 
@@ -167,58 +174,61 @@ export const MainContent = () => {
 						Proyectos
 					</h2>
 				</div>
-				<div className='flex flex-col gap-10'>
-					{!projects || isLoadingProjects ? (
-						<SkeletonProject />
-					) : projects.length === 0 ? (
-						<p className='text-slate-200 font-bold text-lg'>
-							No hay proyectos
-						</p>
-					) : (
-						projects.map(project => (
-							<div
-								className='flex gap-5 lg:p-5  rounded-md lg:hover:bg-teal-400/10  hover:shadow-sm transition-all flex-col lg:flex-row'
-								key={project.id}
-							>
-								<div className='w-full md:w-[200px] lg:w-[150px] h-full md:h-[120px]'>
-									<Image
-										src={project.frontImage}
-										alt={project.name}
-										width={150}
-										height={150}
-										className='rounded-md object-cover  h-full w-full'
-									/>
-								</div>
 
-								<div className='flex flex-col gap-1 flex-1'>
-									<h3 className='text-slate-200 font-semibold tracking-wide  leading-tight text-lg mb-2'>
-										{project.name}
-									</h3>
-									<p className='leading-normal text-sm text-slate-400 mb-1'>
-										{project.shortDescription}
-									</p>
-									{project.technologies.length > 0 && (
-										<TechnologiesUsedList
-											technologies={project.technologies}
+				{
+					<div className='flex flex-col gap-10'>
+						{!projects || isLoadingProjects ? (
+							<SkeletonProject />
+						) : projects.length === 0 ? (
+							<p className='text-slate-200 font-bold text-lg'>
+								No hay proyectos
+							</p>
+						) : (
+							projects.map(project => (
+								<div
+									className='flex gap-5 lg:p-5  rounded-md lg:hover:bg-teal-400/10  hover:shadow-sm transition-all flex-col lg:flex-row'
+									key={project.id}
+								>
+									<div className='w-full md:w-[200px] lg:w-[150px] h-full md:h-[120px]'>
+										<Image
+											src={project.frontImage}
+											alt={project.name}
+											width={150}
+											height={150}
+											className='rounded-md object-cover  h-full w-full'
 										/>
-									)}
-									<a
-										href={project.link}
-										target='_blank'
-										rel='noreferrer noopener'
-										className='self-start text-slate-200 font-semibold tracking-wide  leading-tight text-md  flex items-center gap-1 group hover:text-teal-300 mt-4 md:self-end md:mt-2 md:text-sm'
-									>
-										Ir al Demo
-										<MdOutlineArrowOutward
-											className='group-hover:text-teal-300 group-hover:-translate-y-1 transition-transform duration-300 self-end'
-											size={16}
-										/>
-									</a>
+									</div>
+
+									<div className='flex flex-col gap-1 flex-1'>
+										<h3 className='text-slate-200 font-semibold tracking-wide  leading-tight text-lg mb-2'>
+											{project.name}
+										</h3>
+										<p className='leading-normal text-sm text-slate-400 mb-1'>
+											{project.shortDescription}
+										</p>
+										{project.technologies.length > 0 && (
+											<TechnologiesUsedList
+												technologies={project.technologies}
+											/>
+										)}
+										<a
+											href={project.link}
+											target='_blank'
+											rel='noreferrer noopener'
+											className='self-start text-slate-200 font-semibold tracking-wide  leading-tight text-md  flex items-center gap-1 group hover:text-teal-300 mt-4 md:self-end md:mt-2 md:text-sm'
+										>
+											Ir al Demo
+											<MdOutlineArrowOutward
+												className='group-hover:text-teal-300 group-hover:-translate-y-1 transition-transform duration-300 self-end'
+												size={16}
+											/>
+										</a>
+									</div>
 								</div>
-							</div>
-						))
-					)}
-				</div>
+							))
+						)}
+					</div>
+				}
 			</section>
 		</main>
 	);
